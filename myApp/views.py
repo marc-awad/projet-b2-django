@@ -15,8 +15,7 @@ def demande_conges(request):
                 form.add_error('end_date', "La date de fin doit être après la date de début.")
             else:
                 form.save()
-                print("Congés pris en compte")
-                sleep(1)
+                sleep(0.5)
                 return redirect('/')
 
     else:
@@ -44,11 +43,14 @@ def admin_page(request):
         conge = get_object_or_404(Conges, id=conge_id)
         print(conge)
         if action == 'valider':
-            conge.validate = True
+            conge.status = "validee"
             validation(conge)
         elif action == 'refuser':
-            conge.validate = False
+            conge.status = "refusee"
             cancel(conge)
+        else:
+            conge.status = "en_attente"
+            
         conge.save()
     return render(request, 'admin.html', context={'conges': conges})
 

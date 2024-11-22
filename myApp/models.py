@@ -11,8 +11,13 @@ class Conges(models.Model):
     ('conges_maladie', 'Congés Maladie'),
     ('conges_exceptionnels', 'Congés Exceptionnels'),]
     reason = models.CharField(max_length=20, choices=REASONS, default='conges_payes')
-    validate = models.BooleanField(default=False)
-
+    
+    STATUS_CHOICES = [
+        ('en_attente', 'En attente'),
+        ('refusee', 'Refusée'),
+        ('validee', 'Validée'),
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='en_attente')
 
     def __str__(self):
         return f"{self.name} {self.lastname}"

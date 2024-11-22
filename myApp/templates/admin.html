@@ -15,20 +15,31 @@
             <p>Nom : {{conge.lastname}}</p>
             <p>Date début : {{conge.date}}</p>
             <p>Date fin : {{conge.end_date}}</p>
-            <p>Valider : {{conge.validate}}</p>
-            <form method="POST" style="display:inline;" class="form_button">
+            <p>Status : {{conge.get_status_display}}</p>
+            {% if conge.status == 'en_attente' %}
+                <form method="POST" style="display:inline;" class="form_button">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{ conge.id }}">
                 <input type="hidden" name="action" value="refuser">
-                <button type="submit" class='cancelled_button'>✖</button>
-            </form>
+                <button type="submit" class="cancelled_button">✖</button>
+                </form>
 
-            <form method="POST" style="display:inline;" class="form_button">
+                <form method="POST" style="display:inline;" class="form_button">
                 {% csrf_token %}
                 <input type="hidden" name="id" value="{{ conge.id }}">
                 <input type="hidden" name="action" value="valider">
-                <button type="submit" class='validate_button'>✔</button>
-            </form>
+                <button type="submit" class="validate_button">✔</button>
+                </form>
+            {% else %}
+                <form method="POST" style="display:inline;" class="form_button">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ conge.id }}">
+                <input type="hidden" name="action" value="modifier">
+                <button type="submit">Modifier</button>
+                </form>
+            {% endif %}
+
+
         </div>
     {% endfor %}
 </body>
