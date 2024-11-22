@@ -4,6 +4,7 @@ from .models import Conges
 from .sending_mail import validation, cancel
 from time import sleep
 from django.contrib import messages
+from datetime import datetime
 
 
 def demande_conges(request):
@@ -12,8 +13,11 @@ def demande_conges(request):
         if form.is_valid():
             start_date = form.cleaned_data.get("date")
             end_date = form.cleaned_data.get("end_date")
+            today = datetime.today().date()
             if start_date > end_date:
                 form.add_error('end_date', "La date de fin doit être après la date de début.")
+            elif start_date < today:
+                form.add_error('date', "La date de début ne peut pas être dans le passé.") 
             else:
                 messages.success(request, 'Votre demande a été envoyée avec succès.')
                 form.save()
