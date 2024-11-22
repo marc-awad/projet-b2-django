@@ -49,3 +49,10 @@ input ,select{
     box-sizing: border-box;
     transition: border-color 0.3s;
 }
+input:focus , select:focus{
+    background-color: #dbdbdb;
+}
+li{
+    color: red;
+    font-weight: bold;
+}

@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import AskConges , AdminstratorConnection
 from .models import Conges
 from .sending_mail import validation, cancel
+from time import sleep
 
 
 def demande_conges(request):
@@ -10,6 +11,9 @@ def demande_conges(request):
         if form.is_valid():
             form.save()
             print("Congés pris en compte")
+            sleep(1)
+            return redirect('/')
+
     else:
         form = AskConges()
     return render(request, 'demande_conges.html', context={'form': form})
