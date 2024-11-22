@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AskConges , AdminstratorConnection
 from .models import Conges
 from .sending_mail import validation, cancel
 from time import sleep
+from django.contrib import messages
 
 
 def demande_conges(request):
@@ -14,9 +15,10 @@ def demande_conges(request):
             if start_date > end_date:
                 form.add_error('end_date', "La date de fin doit être après la date de début.")
             else:
+                messages.success(request, 'Votre demande a été envoyée avec succès.')
                 form.save()
                 sleep(0.5)
-                return redirect('/')
+                return redirect('redirection/')
 
     else:
         form = AskConges()
@@ -50,7 +52,10 @@ def admin_page(request):
             cancel(conge)
         else:
             conge.status = "en_attente"
-            
+
         conge.save()
     return render(request, 'admin.html', context={'conges': conges})
+
+def redirection_page(request):
+    return render(request, 'redirection.html')
 
