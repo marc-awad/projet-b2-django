@@ -8,4 +8,4 @@ class AskConges(forms.ModelForm):
 
 class AdminstratorConnection(forms.Form):
     username = forms.CharField()
-    password = forms.CharField()
+    password = forms.CharField( widget=forms.PasswordInput())
