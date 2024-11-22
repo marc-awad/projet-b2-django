@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AskConges , AdminstratorConnection
 from .models import Conges
+from .sending_mail import validation, cancel
+
 
 def demande_conges(request):
     if request.method == 'POST':
@@ -29,11 +31,15 @@ def admin_page(request):
         conge_id = request.POST['id']
         action = request.POST['action']
 
-        conge = Conges.objects.get(id=conge_id)
+
+        conge = get_object_or_404(Conges, id=conge_id)
+        print(conge)
         if action == 'valider':
             conge.validate = True
+            validation(conge)
         elif action == 'refuser':
             conge.validate = False
+            cancel(conge)
         conge.save()
     return render(request, 'admin.html', context={'conges': conges})
 

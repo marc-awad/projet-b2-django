@@ -14,11 +14,5 @@ class Conges(models.Model):
     validate = models.BooleanField(default=False)
 
 
-    def accepted(self):
-        self.status = True
-
-    def cancel(self):
-        self.status = False
-
     def __str__(self):
         return f"{self.name} {self.lastname}"
