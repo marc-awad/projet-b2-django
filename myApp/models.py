@@ -11,6 +11,14 @@ class Conges(models.Model):
     ('conges_maladie', 'Congés Maladie'),
     ('conges_exceptionnels', 'Congés Exceptionnels'),]
     reason = models.CharField(max_length=20, choices=REASONS, default='conges_payes')
+    validate = models.BooleanField(default=False)
+
+
+    def accepted(self):
+        self.status = True
+
+    def cancel(self):
+        self.status = False
 
     def __str__(self):
         return f"{self.name} {self.lastname}"

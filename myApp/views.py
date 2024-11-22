@@ -25,5 +25,15 @@ def home_page(request):
 
 def admin_page(request):
     conges = Conges.objects.all()
+    if request.method == 'POST':
+        conge_id = request.POST['id']
+        action = request.POST['action']
+
+        conge = Conges.objects.get(id=conge_id)
+        if action == 'valider':
+            conge.validate = True
+        elif action == 'refuser':
+            conge.validate = False
+        conge.save()
     return render(request, 'admin.html', context={'conges': conges})
 
