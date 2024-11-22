@@ -14,6 +14,12 @@ class AskConges(forms.ModelForm):
         model = Conges
         fields = ['name', 'lastname', 'email', 'date','end_date', 'reason']
 
+        #Permet de spécifier que date et end_date sont des input de type date
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
     #Code lié au regex plus haut
     # date = forms.DateField(validators=[validate_date])
     # end_date = forms.DateField(validators=[validate_date])
