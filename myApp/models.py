@@ -6,7 +6,11 @@ class Conges(models.Model):
     email = models.EmailField()
     date = models.DateField()
     end_date = models.DateField()
-    reason = models.TextField()
+    REASONS = [
+    ('conges_payes', 'Congés Payés'),
+    ('conges_maladie', 'Congés Maladie'),
+    ('conges_exceptionnels', 'Congés Exceptionnels'),]
+    reason = models.CharField(max_length=20, choices=REASONS, default='conges_payes')
 
     def __str__(self):
         return f"{self.name} {self.lastname}"

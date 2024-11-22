@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+</head>
+<body>
+    <h1>Interface de gestion de congés</h1>
+    <form action="{% url 'demande_conges' %}">
+        <button type="submit">Prendre un congés </button>
+    </form>
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Se connecter en tant qu'adminstrateur</button>
+    </form>
+</body>
+</html>
