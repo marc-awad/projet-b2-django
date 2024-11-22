@@ -56,3 +56,9 @@ li{
     color: red;
     font-weight: bold;
 }
+.validate_button{
+    background-color: rgb(0, 163, 0);
+}
+.cancelled_button{
+    background-color: rgb(169, 0, 0);
+}
