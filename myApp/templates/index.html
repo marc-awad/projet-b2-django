@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page d'accueil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <h1>Interface de gestion de congés</h1>
-    <form action="{% url 'demande_conges' %}">
+    <form action="{% url 'demande_conges' %}" class ='normal_form'>
         <button type="submit">Prendre un congés </button>
     </form>
-    <form method="post">
+    <form method="post" class= 'normal_form'>
         {% csrf_token %}
         {{form}}
         <button type="submit">Se connecter en tant qu'adminstrateur</button>

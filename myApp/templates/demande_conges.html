@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page de congés</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <form method="post">
+    <h1>Interface de demande de congés</h1>
+    <form method="post" class='normal_form'>
         {% csrf_token %}
         {{form}}
-        <button type="submit"></button>
+        <button type="submit">Valider le congé</button>
     </form>
 </body>
 </html>

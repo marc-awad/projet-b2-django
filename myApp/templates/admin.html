@@ -4,31 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interface adminstrateur</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <h1>Interface Administrateur</h1>
     {% for conge in conges %}
-        <p>Prénom : {{conge.name}}</p>
-        <p>Nom : {{conge.lastname}}</p>
-        <p>Date début: {{conge.date}}</p>
-        <p>Date fin : {{conge.end_date}}</p>
-        {% if conge.validate != None%}
-            <p>Valider : {{conge.validate}}</p>
-        {% endif %}
-        <form method="POST" style="display:inline;">
-            {% csrf_token %}
-            <input type="hidden" name="id" value="{{ conge.id }}">
-            <input type="hidden" name="action" value="valider">
-            <button type="submit">Valider</button>
-        </form>
-
-        <form method="POST" style="display:inline;">
-            {% csrf_token %}
-            <input type="hidden" name="id" value="{{ conge.id }}">
-            <input type="hidden" name="action" value="refuser">
-            <button type="submit">Refuser</button>
-        </form>
-        <br><br>
+        <div class ='div_demande_recap'>
+            <p>Prénom : {{conge.name}}</p>
+            <p>Nom : {{conge.lastname}}</p>
+            <p>Date début: {{conge.date}}</p>
+            <p>Date fin : {{conge.end_date}}</p>
+            {% if conge.validate != None%}
+                <p>Valider : {{conge.validate}}</p>
+            {% endif %}
+            <form method="POST" style="display:inline;" class="form_button">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ conge.id }}">
+                <input type="hidden" name="action" value="valider">
+                <button type="submit">Valider</button>
+            </form>
+    
+            <form method="POST" style="display:inline;" class="form_button">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ conge.id }}">
+                <input type="hidden" name="action" value="refuser">
+                <button type="submit">Refuser</button>
+            </form>
+        </div>
     {% endfor %}
 </body>
 </html>
