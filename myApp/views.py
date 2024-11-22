@@ -9,10 +9,15 @@ def demande_conges(request):
     if request.method == 'POST':
         form = AskConges(request.POST)
         if form.is_valid():
-            form.save()
-            print("Congés pris en compte")
-            sleep(1)
-            return redirect('/')
+            start_date = form.cleaned_data.get("date")
+            end_date = form.cleaned_data.get("end_date")
+            if start_date > end_date:
+                form.add_error('end_date', "La date de fin doit être après la date de début.")
+            else:
+                form.save()
+                print("Congés pris en compte")
+                sleep(1)
+                return redirect('/')
 
     else:
         form = AskConges()

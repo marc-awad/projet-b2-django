@@ -1,7 +1,7 @@
 from django import forms
 from .models import Conges
 # import re
-# from django.core.exceptions import ValidationError
+#from django.core.exceptions import ValidationError
 
 # Regex pas nécessaire car Django fait déjà la validation de la date pour nous
 # def validate_date(date):
@@ -19,6 +19,7 @@ class AskConges(forms.ModelForm):
             'date': forms.DateInput(attrs={'type': 'date'}),
             'end_date': forms.DateInput(attrs={'type': 'date'}),
         }
+
 
     #Code lié au regex plus haut
     # date = forms.DateField(validators=[validate_date])
