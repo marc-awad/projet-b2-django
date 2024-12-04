@@ -6,7 +6,9 @@ from .sending_mail import validation, cancel
 from time import sleep
 from django.contrib import messages
 from datetime import datetime
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # View for leave request form 
 def demande_conges(request):
@@ -37,8 +39,12 @@ def home_page(request):
     if request.method == 'POST':
         form = AdminstratorConnection(request.POST)
         if form.is_valid():
-            if(form.cleaned_data['username'] == 'lorenzo' and form.cleaned_data['password'] == 'graven123'):
+            PASSWORD = os.getenv("PASSWORD")
+            USERNAME = os.getenv("USERNAME")
+            if(form.cleaned_data['username'] == USERNAME and form.cleaned_data['password'] == PASSWORD):
                 return redirect('administrateur/')
+            else:
+                messages.error(request, "Identifiants incorrects.")
     else:
         form = AdminstratorConnection()
             
